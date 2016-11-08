@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">宿舍八卦</string>
+
+    <string name="event_title_hint">这里可以输入八卦标题</string>
+
+    <string name="event_title_label">标题</string>
+    <string name="event_details_label">内容</string>
+    <string name="event_solved_label">已爆料</string>
+
+</resources>
