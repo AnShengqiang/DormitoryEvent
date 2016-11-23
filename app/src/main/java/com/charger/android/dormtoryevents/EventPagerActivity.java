@@ -52,7 +52,7 @@ public class EventPagerActivity extends FragmentActivity {
             }
         });
 
-        for (int i = 0; i <= mEvents.size(); i++) {
+        for (int i = 0; i < mEvents.size(); i++) {
             if(mEvents.get(i).getId().equals(eventId)){
                 mViewPager.setCurrentItem(i);
                 break;
