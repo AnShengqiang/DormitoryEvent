@@ -7,4 +7,6 @@
     <string name="event_details_label">内容</string>
     <string name="event_solved_label">已爆料</string>
 
+    <string name="date_picker_title">日期</string>
+
 </resources>
