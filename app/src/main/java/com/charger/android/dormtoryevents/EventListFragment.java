@@ -3,9 +3,13 @@ package com.charger.android.dormtoryevents;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -22,6 +26,12 @@ public class EventListFragment extends Fragment{
 
     private RecyclerView mEventRecyclerView;
     private EventAdapter mAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +51,40 @@ public class EventListFragment extends Fragment{
     public void onResume(){
         super.onResume();
         updateUI();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_event_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_item_new_event:
+                Event event = new Event();
+                EventLab.get(getActivity()).addEvent(event);
+                Intent intent = EventPagerActivity
+                        .newIntent(getActivity(), event.getId());
+                startActivity(intent);
+                return true;
+            case R.id.menu_item_show_subtitle:
+                updateSubtitle();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void updateSubtitle(){
+        EventLab eventLab = EventLab.get(getActivity());
+        int eventCount = eventLab.getEvents().size();
+        String subtitle = getString(R.string.subtitle_format, eventCount);//这本书给出的代码，报错但依旧可以通过编译
+
+        AppCompatActivity activity = (AppCompatActivity)getActivity();
+        activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
     private void updateUI(){

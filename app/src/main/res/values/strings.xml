@@ -9,4 +9,9 @@
 
     <string name="date_picker_title">日期</string>
 
+    <string name="new_event">新的八卦</string>
+    <string name="show_subtitle">显示副标题</string>
+    <string name="hide_subtitle">隐藏副标题</string>
+    <string name="subtitle_format">%1$s 条八卦</string>
+
 </resources>

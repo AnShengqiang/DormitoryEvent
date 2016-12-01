@@ -24,13 +24,11 @@ public class EventLab {
 
     private EventLab(Context context){
         mEvents = new ArrayList<>();
-        for(int i = 0; i<100; i++){
-            Event event = new Event();
-            event.setTitle("八卦 ："+ i);
-            event.setSolved(i%2 == 0);
-            mEvents.add(event);
-        }
-    };
+    }
+
+    public void addEvent(Event e){
+        mEvents.add(e);
+    }
 
     public List<Event> getEvents(){
         return mEvents;
