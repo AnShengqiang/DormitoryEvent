@@ -13,11 +13,16 @@ public class Event {
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
+    private String mSuspect;
 
 
 
     public Event(){
-        mId = UUID.randomUUID();                                                                    //随机生成id
+        this(UUID.randomUUID());
+    }
+
+    public Event(UUID id){
+        mId = id;
         mDate = new Date();
     }
 
@@ -50,5 +55,13 @@ public class Event {
 
     public void setSolved(boolean solved) {
         mSolved = solved;
+    }
+
+    public String getSuspect() {
+        return mSuspect;
+    }
+
+    public void setSuspect(String suspect) {
+        mSuspect = suspect;
     }
 }

@@ -14,4 +14,17 @@
     <string name="hide_subtitle">隐藏副标题</string>
     <string name="subtitle_format">%1$s 条八卦</string>
 
+    <string name="event_suspect_text">选择基友</string>
+    <string name="event_report_text">偷偷爆料</string>
+
+    <string name="event_report">%1$s!
+        The event was discovered on %2$s. %3$s, and %4$s
+    </string>
+    <string name="event_report_solved">The case is solved</string>
+    <string name="event_report_unsolved">The case is not solved</string>
+    <string name="event_report_no_suspect">there is no suspect.</string>
+    <string name="event_report_suspect">the suspect is %s.</string>
+    <string name="event_report_subject">DormitoryEvent Event Report</string>
+    <string name="send_report">Send event report via</string>
+
 </resources>
