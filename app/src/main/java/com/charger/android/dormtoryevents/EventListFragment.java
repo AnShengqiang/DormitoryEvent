@@ -1,5 +1,6 @@
 package com.charger.android.dormtoryevents;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,18 @@ public class EventListFragment extends Fragment{
     private RecyclerView mEventRecyclerView;
     private EventAdapter mAdapter;
     private boolean mSubtitleVisible;
+    private Callbacks mCallbacks;
+
+    /*Required interface for hosting activities*/
+    public interface Callbacks{
+        void onEventSelected(Event event);
+    }
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        mCallbacks = (Callbacks) activity;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -67,6 +80,12 @@ public class EventListFragment extends Fragment{
     }
 
     @Override
+    public void onDetach(){
+        super.onDetach();
+        mCallbacks = null;
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_event_list, menu);
@@ -85,9 +104,9 @@ public class EventListFragment extends Fragment{
             case R.id.menu_item_new_event:
                 Event event = new Event();
                 EventLab.get(getActivity()).addEvent(event);
-                Intent intent = EventPagerActivity
-                        .newIntent(getActivity(), event.getId());
-                startActivity(intent);
+
+                updateUI();
+                mCallbacks.onEventSelected(event);
                 return true;
             case R.id.menu_item_show_subtitle:
                 mSubtitleVisible = !mSubtitleVisible;
@@ -113,7 +132,7 @@ public class EventListFragment extends Fragment{
         activity.getSupportActionBar().setSubtitle(subtitle);
     }
 
-    private void updateUI(){
+    public void updateUI(){
         EventLab eventLab = EventLab.get(getActivity());
         List<Event> events = eventLab.getEvents();
 
@@ -152,8 +171,7 @@ public class EventListFragment extends Fragment{
 
         @Override
         public void onClick(View v){
-            Intent intent = EventPagerActivity.newIntent(getActivity(), mEvent.getId());
-            startActivity(intent);
+            mCallbacks.onEventSelected(mEvent);
         }
 
         public void bindEvent(Event event){

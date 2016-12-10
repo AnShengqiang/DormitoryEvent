@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Environment;
 
 import com.charger.android.dormtoryevents.database.EventBaseHelper;
 import com.charger.android.dormtoryevents.database.EventCursorWrapper;
 import com.charger.android.dormtoryevents.database.EventDbSchema.EventTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -77,6 +79,17 @@ public class EventLab {
         }finally {
             cursor.close();
         }
+    }
+
+    public File getPhotoFile(Event event){
+        File externalFilesDir = mContext
+                .getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        if (externalFilesDir == null){
+            return null;
+        }
+
+        return new File(externalFilesDir, event.getPhotoFilename());
     }
 
     public void updateEvent(Event event) {

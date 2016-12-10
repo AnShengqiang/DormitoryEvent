@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.List;
 import java.util.UUID;
 
-public class EventPagerActivity extends AppCompatActivity {
+public class EventPagerActivity extends AppCompatActivity implements EventFragment.Callbacks{
 
     private static final String EXTRA_EVENT_ID =
             "com.charger.android.dormtoryevents.event_id";
@@ -59,6 +59,11 @@ public class EventPagerActivity extends AppCompatActivity {
                 break;
             }
         }
+
+    }
+
+    @Override
+    public void onEventUpdated(Event event) {
 
     }
 }
